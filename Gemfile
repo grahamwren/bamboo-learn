@@ -8,8 +8,10 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use mysql as the dev/prod database for Active Record
+gem 'mysql2', group: [:development, :production]
+# Use sqlite3 as the test database for Active Record
+gem 'sqlite3', group: :test
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -29,6 +31,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+# Use users for user login management
+gem 'devise', '~> 4.3.0'
+gem 'slim'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
