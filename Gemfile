@@ -34,6 +34,8 @@ gem 'jbuilder', '~> 2.5'
 # Use users for user login management
 gem 'devise', '~> 4.3.0'
 gem 'slim'
+gem 'bootstrap'
+gem 'jquery-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

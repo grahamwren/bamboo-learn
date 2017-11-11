@@ -1,0 +1,14 @@
+.container-fluid.align-middle.my-1
+  ul.list-group
+    - @users.each do |u|
+      a *{href: user_path(u.id)}
+        li.list-group-item
+          .row
+            .col
+              span = u.school_id
+            .col
+              span = u.first_name.capitalize + ' ' + u.last_name.capitalize
+  - if current_user.user_type.to_sym == :admin
+    form *{action: new_user_path}
+      .form-group.py-1
+        input.form-control *{type: 'submit', value: 'Add User'}
