@@ -1,0 +1,28 @@
+.container-fluid.align-middle.user_form
+  = form_for @user do |f|
+    .form-group
+      = f.label :school_id, 'School Id'
+      = f.text_field :school_id, class: 'form-control', disabled: true
+    .form-group
+      = f.label :email
+      = f.text_field :email, class: 'form-control'
+    .form-group
+      = f.label :first_name
+      = f.text_field :first_name, class: 'form-control'
+    .form-group
+      = f.label :last_name
+      = f.text_field :last_name, class: 'form-control'
+    .form-group
+      = f.label :dob, 'Date of Birth'
+      = f.date_field :dob, class: 'form-control'
+    .form-group
+      = f.label :user_types, 'User Type'
+      .container-fluid.p-0
+        - User.user_types.each do |k, v|
+          label.custom-control.custom-radio
+            = f.radio_button :user_type, k, class: 'custom-control-input',
+                    disabled: current_user.user_type.to_sym != :admin
+            span.custom-control-indicator
+            = f.label k, class: 'custom-control-description'
+    .form-group
+      = f.submit class: 'form-control'

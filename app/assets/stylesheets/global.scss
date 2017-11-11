@@ -1,0 +1,38 @@
+.devise {
+  .background {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: white;
+
+    .container-fluid {
+      background: deepskyblue;
+      border-radius: 10px;
+      box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 lightblue !important;
+      //border-color: black;
+      padding: 2rem;
+    }
+  }
+
+  form.field {
+
+  }
+}
+
+.header {
+  .logo {
+
+  }
+
+}
+
+
+a {
+  color: inherit !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+  color: inherit !important;
+}

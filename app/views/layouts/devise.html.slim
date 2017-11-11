@@ -8,13 +8,14 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
-  body
-    .container-fluid.col-sm-12.col-md-10.col-md-8.p-0
-      = render 'layouts/header'
-      - if flash[:notice]
-        .alert.alert-success
-          = flash[:notice]
-      - if flash[:alert]
-        .alert.alert-warning
-          = flash[:alert]
-      = yield
+  body.devise
+    .background.gradient-red-yellow.hidden-sm-down.pb-5
+      .container-fluid.col-11.col-sm-11.col-md-6.col-lg-5
+        h1 Bamboo Learning
+        - if flash[:notice]
+          .alert.alert-success
+            = flash[:notice]
+        - if flash[:alert]
+          .alert.alert-warning
+            = flash[:alert]
+        = yield
