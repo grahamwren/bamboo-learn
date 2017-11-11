@@ -9,33 +9,41 @@ class UsersController < ApplicationController
   end
 
   def new
-    if current_user.user_type.to_sym != :admin
-      redirect_to users_path, alert: "Access Denied"
-    else
+    if current_user.admin?
       @user = User.new
       render 'new'
+    else
+      redirect_to users_path, alert: "Access Denied"
     end
   end
 
   def create
-    @user = User.new(user_params.merge({ password: SecureRandom.hex(64) }))
-    if @user.valid?
-      @user.save!
-      render 'edit'
+    if current_user.admin?
+      @user = User.new(user_params.merge({ password: SecureRandom.hex(64) }))
+      if @user.valid?
+        @user.save!
+        render 'edit'
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      redirect_back alert: 'Access Denied'
     end
   end
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    render 'edit', notice: "User updated"
+    if @user == current_user || current_user.admin?
+      @user.update(user_params)
+      render 'edit', notice: 'User updated'
+    else
+      redirect_back alert: 'Access Denied.'
+    end
   end
 
   def show
     @user = User.find(params[:id])
-    if @user == current_user || current_user.user_type.to_sym == :admin
+    if @user == current_user || current_user.admin?
       edit
     else
       render 'show'
@@ -44,10 +52,10 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    if @user == current_user || current_user.user_type.to_sym == :admin
+    if @user == current_user || current_user.admin?
       render 'edit'
     else
-      redirect_back alert: "Access denied."
+      redirect_back alert: 'Access denied.'
     end
   end
 
