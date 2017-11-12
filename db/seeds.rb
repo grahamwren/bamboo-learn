@@ -33,6 +33,24 @@ users_list = [
       dob: Date.new(1970, 1, 1)
     }
 ]
+course_list = [
+    { short_name: 'CS3200',
+      long_name: 'Database Design SEC 1 Fall 2017',
+      description: 'This course presents the database design process practiced when creating a ' +
+          'relational database; it also presents the relational database management system’s ' +
+          'architecture as well as the fundamental ACID properties of a relational database ' +
+          'management system. The extended entity- relationship model and normalization will be ' +
+          'used in designing relational schemas. Relational algebra and its relationship to the ' +
+          'SQL language will be presented. Advanced topics include triggers, stored procedures, ' +
+          'indexing, query plan representation, elementary query optimization, and fundamentals ' +
+          'of transactions, concurrency and recovery. The course will also include an ' +
+          'introduction to NoSQL databases and provide students the opportunity to compare SQL ' +
+          'to NoSQL (**time permitting**). Mongo DB functionality and architecture will be ' +
+          'reviewed. Students will work in groups to define a database project that includes ' +
+          'the design and implementation of a database as well as an application for ' +
+          'interacting with the database.'
+    }
+]
 
 puts "Seeding with env: " + Rails.env
 case Rails.env
@@ -40,9 +58,13 @@ case Rails.env
     users_list.each do |u|
       User.create(u)
     end
+
+    course_list.each do |c|
+      Course.create(c.merge({ instructor: User.teacher.first}))
+    end
   when 'production'
     # in production force password reset
     users_list.each do |u|
-      User.create(u.merge({ password: SecureRandom.hex(64) }))
+      User.find_or_create_by(u.merge({ password: SecureRandom.hex(64) }))
     end
 end
