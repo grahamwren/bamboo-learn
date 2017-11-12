@@ -6,4 +6,4 @@ services:
   - mysql
 
 before_install:
-  - mysql -e 'CREATE DATABASE bamboo-learn-test;'
+  - mysql -e 'CREATE DATABASE `bamboo-learn-test`;'
