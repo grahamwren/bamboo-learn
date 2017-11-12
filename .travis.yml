@@ -1,3 +1,9 @@
 language: ruby
 rvm:
   - 2.4.2
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE bamboo-learn-test;'
