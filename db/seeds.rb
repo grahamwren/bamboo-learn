@@ -65,6 +65,6 @@ case Rails.env
   when 'production'
     # in production force password reset
     users_list.each do |u|
-      User.find_or_create_by(u.merge({ password: SecureRandom.hex(64) }))
+      User.create(u.merge({ password: SecureRandom.hex(64) }))
     end
 end
