@@ -33,5 +33,5 @@ production:
   <<: *default
   username: <%= ENV.fetch("MYSQL_USERNAME") { "root" } %>
   password: <%= ENV.fetch("MYSQL_PASSWORD") { "" } %>
-  host: <%= ENV.fetch("MYSQL_HOST") %>
-  database: <%= ENV.fetch("MYSQL_DATABASE") %>
+  host: <%= ENV.fetch("MYSQL_HOST") { "127.0.0.1" }%>
+  database: <%= ENV.fetch("MYSQL_DATABASE") { "bamboo-learn" }%>
