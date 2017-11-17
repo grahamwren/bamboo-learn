@@ -8,7 +8,7 @@
               span = u.school_id
             .col
               span = u.first_name.capitalize + ' ' + u.last_name.capitalize
-  - if current_user.user_type.to_sym == :admin
+  - if current_user.admin?
     form *{action: new_user_path}
       .form-group.py-1
         input.form-control *{type: 'submit', value: 'Add User'}

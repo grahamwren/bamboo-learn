@@ -1,8 +1,8 @@
-h2
+h2.mb-4
   | Resend unlock instructions
 = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
   .field.form-group
     = f.email_field :email, placeholder: 'Email', autofocus: true, class: 'form-control'
   .actions.form-group
-    = f.submit "Resend unlock instructions", class: 'form-control'
+    = f.submit "Resend unlock instructions", class: 'form-control mb-3'
 = render "users/shared/links"

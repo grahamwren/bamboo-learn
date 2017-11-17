@@ -1,4 +1,4 @@
-h2
+h2.mb-4
   | Log in
 = form_for(resource, as: resource_name, url: session_path(resource_name), class: 'form-signin') do |f|
   .field.form-group
@@ -12,5 +12,5 @@ h2
         span.custom-control-indicator
         = f.label :remember_me, class: 'custom-control-description'
   .actions
-    = f.submit "Log in", class: 'form-control mb-2'
+    = f.submit "Log in", class: 'form-control mb-3'
 = render "users/shared/links"

@@ -9,7 +9,7 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
   body
-    .container-fluid.col-sm-12.col-md-10.col-md-8.p-0
+    .container-fluid.col-sm-12.col-md-10.col-lg-8.p-0
       = render 'layouts/header'
       - if flash[:notice]
         .alert.alert-success
