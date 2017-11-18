@@ -28,7 +28,10 @@ test:
 
 
 # Need to export MYSQL_USERNAME and MYSQL_PASSWORD to env
+# mysql://bde42b49c98d18:e9af733d@us-cdbr-iron-east-05.cleardb.net/heroku_4d12e409880c60e?reconnect=true
 production:
   <<: *default
   username: <%= ENV.fetch("MYSQL_USERNAME") { "root" } %>
   password: <%= ENV.fetch("MYSQL_PASSWORD") { "" } %>
+  host: <%= ENV.fetch("MYSQL_HOST") { "127.0.0.1" }%>
+  database: <%= ENV.fetch("MYSQL_DATABASE") { "bamboo-learn" }%>

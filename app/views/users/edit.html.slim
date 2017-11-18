@@ -21,7 +21,7 @@
         - User.user_types.each do |k, v|
           label.custom-control.custom-radio
             = f.radio_button :user_type, k, class: 'custom-control-input',
-                    disabled: current_user.user_type.to_sym != :admin
+                    disabled: !current_user.admin?
             span.custom-control-indicator
             = f.label k, class: 'custom-control-description'
     .form-group

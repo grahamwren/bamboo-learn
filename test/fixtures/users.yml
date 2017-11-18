@@ -4,14 +4,29 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
+admin:
   email: sam@bamboo.com
+  encrypted_password: <%= User.new.send(:password_digest, 'thisisaterriblepassword') %>
   first_name: Sam
   last_name: test
-  school_id: 9999
+  school_id: 9997
   user_type: admin
   dob: <%= 1.year.ago.to_s(:db) %>
-# column: value
-#
-#two: {}
-# column: value
+
+teacher:
+  email: blake@bamboo.com
+  encrypted_password: <%= User.new.send(:password_digest, 'thisisaterriblepassword') %>
+  first_name: Blake
+  last_name: test
+  school_id: 9998
+  user_type: teacher
+  dob: <%= 1.year.ago.to_s(:db) %>
+
+student:
+  email: kelly@bamboo.com
+  encrypted_password: <%= User.new.send(:password_digest, 'thisisaterriblepassword') %>
+  first_name: Kelly
+  last_name: test
+  school_id: 9999
+  user_type: student
+  dob: <%= 1.year.ago.to_s(:db) %>

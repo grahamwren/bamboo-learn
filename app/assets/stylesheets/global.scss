@@ -7,7 +7,9 @@
     background-color: white;
 
     .container-fluid {
-      background: deepskyblue;
+      background: skyblue;
+      border: solid;
+      border-width: 2px;
       border-radius: 10px;
       box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 lightblue !important;
       //border-color: black;
