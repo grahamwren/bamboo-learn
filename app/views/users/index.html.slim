@@ -1,13 +1,32 @@
 .container-fluid.align-middle.my-1
-  ul.list-group
-    - @users.each do |u|
-      a *{href: user_path(u.id)}
-        li.list-group-item
-          .row
-            .col
-              span = u.school_id
-            .col
-              span = u.first_name.capitalize + ' ' + u.last_name.capitalize
+  .panel.panel-default
+    table.table.table-striped
+      thead
+        tr
+          th #
+          th Name
+          th
+          - if current_user.admin?
+            th
+      tbody
+        - @users.each do |u|
+          a *{href: user_path(u.id)}
+            tr.panel.panel-default
+              th = u.school_id
+              td = u.first_name.capitalize + ' ' + u.last_name.capitalize
+              td.edit
+                - can_edit = current_user.id == u.id || current_user.admin?
+                = button_to can_edit ? 'Edit' : 'View',
+                        { controller: :users, action: :show, id: u.id },
+                        class: 'btn btn-sm btn-outline-primary float-right',
+                        role: :button, method: :get
+              - if current_user.admin?
+                td.delete
+                  = button_to 'Delete',
+                          { controller: :users, action: :destroy, id: u.id },
+                          class: 'btn btn-sm btn-outline-danger float-right',
+                          disabled: current_user.id == u.id,
+                          method: :delete, data: { confirm: 'Are you sure?' }
   - if current_user.admin?
     form *{action: new_user_path}
       .form-group.py-1
