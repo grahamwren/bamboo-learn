@@ -54,7 +54,11 @@ course_list = [
 ]
 
 assignment_list = [
-
+    { name: 'Homework 1',
+      description: 'This is the first assignment in our class.',
+      course: Proc.new { Course.find_by short_name: 'CS3200' }, # Since courses dont exist yet, Proc delays execution till they do
+      points: 100
+    }
 ]
 
 puts "Seeding with env: " + Rails.env
@@ -66,6 +70,11 @@ case Rails.env
 
     course_list.each do |c|
       Course.create(c.merge({ instructor: User.teacher.first}))
+    end
+
+    assignment_list.each do |a|
+      a[:course] = a[:course].call
+      Assignment.create a
     end
   when 'production'
     # in production force password reset
