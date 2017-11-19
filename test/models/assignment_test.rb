@@ -20,15 +20,14 @@ class AssignmentTest < ActiveSupport::TestCase
     @assignment.name = ''
     assert_not @assignment.valid?
     assert_not_empty @assignment.errors[:name]
-    @assignment.errors[:name] = []
+    @assignment.errors[:name].clear
   end
 
   test "invalid assignment with name too long" do
     100.times { @assignment.name += 'hello' }
-    puts @assignment.name
     assert_not @assignment.valid?
     assert_not_empty @assignment.errors[:name]
-    @assignment.errors[:name] = []
+    @assignment.errors[:name].clear
   end
 
   test "invalid assignment without course" do
