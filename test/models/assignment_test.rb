@@ -17,12 +17,12 @@ class AssignmentTest < ActiveSupport::TestCase
   end
 
   test "invalid assignment if name taken" do
-    assignment_w_name_conflict = Assignment.new name: 'Homework 1',
-                                                course: courses(:cs3700)
-    assert assignment_w_name_conflict.valid?
-    assignment_w_name_conflict.course = courses(:cs3500)
-    assert_not assignment_w_name_conflict.valid?
-    assert_not_empty assignment_w_name_conflict.errors[:name]
+    homework_1 = Assignment.new name: 'Homework 1',
+                                course: courses(:cs3700)
+    assert homework_1.valid?
+    homework_1.course = courses(:cs3500)
+    assert_not homework_1.valid?
+    assert_not_empty homework_1.errors[:name]
   end
 
   test "invalid assignment without name" do
