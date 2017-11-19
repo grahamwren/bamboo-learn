@@ -33,6 +33,7 @@ users_list = [
       dob: Date.new(1970, 1, 1)
     }
 ]
+
 course_list = [
     { short_name: 'CS3200',
       long_name: 'Database Design SEC 1 Fall 2017',
@@ -48,7 +49,16 @@ course_list = [
           'to NoSQL (**time permitting**). Mongo DB functionality and architecture will be ' +
           'reviewed. Students will work in groups to define a database project that includes ' +
           'the design and implementation of a database as well as an application for ' +
-          'interacting with the database.'
+          'interacting with the database.',
+      instructor: Proc.new { User.teacher.first }
+    }
+]
+
+assignment_list = [
+    { name: 'Homework 1',
+      description: 'This is the first assignment in our class.',
+      course: Proc.new { Course.find_by short_name: 'CS3200' }, # Since courses dont exist yet, Proc delays execution till they do
+      points: 100
     }
 ]
 
@@ -56,11 +66,17 @@ puts "Seeding with env: " + Rails.env
 case Rails.env
   when 'development'
     users_list.each do |u|
-      User.create(u)
+      User.create u
     end
 
     course_list.each do |c|
-      Course.create(c.merge({ instructor: User.teacher.first}))
+      c[:instructor] = c[:instructor].call
+      Course.create c
+    end
+
+    assignment_list.each do |a|
+      a[:course] = a[:course].call
+      Assignment.create a
     end
   when 'production'
     # in production force password reset

@@ -4,14 +4,8 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-cs3500:
-  short_name: CS3500
-  long_name: Object Oriented Design
-  description: This is a class
-  instructor: teacher
-
-cs3700:
-  short_name: CS3700
-  long_name: Networks
-  description: This is another class
-  instructor: teacher
+homework_1:
+  name: 'Homework 1'
+  description: 'This is the first assignment in our class.'
+  course: cs3500
+  points: 100
