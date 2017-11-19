@@ -1,3 +1,19 @@
 // Place all the styles related to the courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+td input.btn {
+  max-height: 2rem;
+  padding: .1rem .4rem;
+}
+
+td.edit {
+  width: 2rem;
+
+  input.btn {
+    width: 3rem;
+  }
+}
+
+td.delete {
+  width: 2rem;
+}

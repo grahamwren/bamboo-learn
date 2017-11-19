@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       @user = User.new
       render 'new'
     else
-      redirect_to users_path, alert: "Access Denied"
+      redirect_to users_path, status: :unauthorized, alert: "Access Denied"
     end
   end
 
@@ -22,12 +22,13 @@ class UsersController < ApplicationController
       @user = User.new(user_params.merge({ password: SecureRandom.hex(64) }))
       if @user.valid?
         @user.save!
+        flash[:success] = @user.first_name.capitalize + ' was created successfully'
         index
       else
         render 'new'
       end
     else
-      redirect_back alert: 'Access Denied'
+      redirect_back fallback_location: users_path, status: :unauthorized, alert: 'Access Denied'
     end
   end
 
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
       @user.update(user_params)
       render 'edit', notice: 'User updated'
     else
-      redirect_back alert: 'Access Denied.'
+      redirect_back fallback_location: users_path, status: :unauthorized, alert: 'Access Denied.'
     end
   end
 
@@ -55,8 +56,16 @@ class UsersController < ApplicationController
     if @user == current_user || current_user.admin?
       render 'edit'
     else
-      redirect_back alert: 'Access denied.'
+      redirect_back fallback_location: users_path, status: :unauthorized, alert: 'Access denied.'
     end
+  end
+
+  def destroy
+    redirect_back fallback_location: users_path, status: :unauthorized,
+                  alert: 'Access denied.' and return unless current_user.admin?
+    @user = User.find(params[:id])
+    @user.destroy
+    index
   end
 
   def user_params
