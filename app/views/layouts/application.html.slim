@@ -11,10 +11,7 @@ html
   body
     .container-fluid.col-sm-12.col-md-10.col-lg-8.p-0
       = render 'layouts/header'
-      - if flash[:notice]
-        .alert.alert-success
-          = flash[:notice]
-      - if flash[:alert]
-        .alert.alert-warning
-          = flash[:alert]
+      - flash.each do |k, v|
+        .alert *{class: "alert-#{k}"}
+          = v
       = yield
