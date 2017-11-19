@@ -59,6 +59,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def delete
+    redirect_back alert: 'Access denied.' unless current_user.admin?
+    @user = User.find(params[:id])
+    @user.destroy
+    render 'index'
+  end
+
   def user_params
     params.require(:user).permit(:email, :first_name, :last_name, :user_type, :school_id, :dob)
   end
