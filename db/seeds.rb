@@ -33,6 +33,7 @@ users_list = [
       dob: Date.new(1970, 1, 1)
     }
 ]
+
 course_list = [
     { short_name: 'CS3200',
       long_name: 'Database Design SEC 1 Fall 2017',
@@ -50,6 +51,10 @@ course_list = [
           'the design and implementation of a database as well as an application for ' +
           'interacting with the database.'
     }
+]
+
+assignment_list = [
+
 ]
 
 puts "Seeding with env: " + Rails.env

@@ -6,6 +6,12 @@
 #
 cs3500:
   short_name: CS3500
-  long_name: Networks
+  long_name: Object Oriented Design
   description: This is a class
+  instructor: teacher
+
+cs3700:
+  short_name: CS3700
+  long_name: Networks
+  description: This is another class
   instructor: teacher
