@@ -2,10 +2,7 @@ require 'test_helper'
 
 class CourseTest < ActiveSupport::TestCase
   setup do
-    @course = Course.new short_name: 'CS3500',
-                         long_name: 'Networks',
-                         description: 'This is a class',
-                         instructor: users(:teacher)
+    @course = Course.find_by short_name: 'CS3500'
   end
 
   test "valid course" do
@@ -28,7 +25,7 @@ class CourseTest < ActiveSupport::TestCase
   test "invalid course without short name" do
     @course.short_name = ''
     assert_not @course.valid?
-    assert_not_nil @course.errors[:short_name]
+    assert_not_empty @course.errors[:short_name]
   end
 
   test "invalid course with short name too long" do
