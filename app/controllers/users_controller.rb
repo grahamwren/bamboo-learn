@@ -22,6 +22,7 @@ class UsersController < ApplicationController
       @user = User.new(user_params.merge({ password: SecureRandom.hex(64) }))
       if @user.valid?
         @user.save!
+        flash[:success] = @user.first_name.capitalize + ' was created successfully'
         index
       else
         render 'new'
