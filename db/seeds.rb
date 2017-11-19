@@ -49,7 +49,8 @@ course_list = [
           'to NoSQL (**time permitting**). Mongo DB functionality and architecture will be ' +
           'reviewed. Students will work in groups to define a database project that includes ' +
           'the design and implementation of a database as well as an application for ' +
-          'interacting with the database.'
+          'interacting with the database.',
+      instructor: Proc.new { User.teacher.first }
     }
 ]
 
@@ -65,11 +66,12 @@ puts "Seeding with env: " + Rails.env
 case Rails.env
   when 'development'
     users_list.each do |u|
-      User.create(u)
+      User.create u
     end
 
     course_list.each do |c|
-      Course.create(c.merge({ instructor: User.teacher.first}))
+      c[:instructor] = c[:instructor].call
+      Course.create c
     end
 
     assignment_list.each do |a|
