@@ -15,7 +15,7 @@
               th = u.school_id
               td = u.first_name.capitalize + ' ' + u.last_name.capitalize
               td.edit
-                - can_edit = current_user.id == u.id || current_user.admin?
+                - can_edit = (current_user.id == u.id || current_user.admin?)
                 = button_to can_edit ? 'Edit' : 'View',
                         { controller: :users, action: :show, id: u.id },
                         class: 'btn btn-sm btn-outline-primary float-right',
