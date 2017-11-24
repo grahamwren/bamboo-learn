@@ -44,6 +44,20 @@ class CoursesController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user.admin?
+      @course = Course.find params[:id]
+      if @course.destroy
+        flash[:notice] = @course.short_name + ' deleted'
+      else
+        flash[:alert] = 'Delete failed'
+      end
+      index
+    else
+      redirect_to courses_path, status: :unauthorized, alert: "Access Denied"
+    end
+  end
+
   def course_params
     params.require(:course).permit(:short_name, :long_name, :description, :instructor_id)
   end
