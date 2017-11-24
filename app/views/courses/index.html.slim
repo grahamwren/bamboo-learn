@@ -1,0 +1,31 @@
+.container-fluid.align-middle.my-1
+  .panel.panel-default
+    table.table.table-striped
+      thead
+        tr
+          th Name
+          /th
+          - if current_user.admin?
+            th
+      tbody
+        - @courses.each do |c|
+            tr.panel.panel-default
+                td
+                  = c.short_name
+                  /a *{href: course_path(c)} = c.short_name
+                /td.edit
+                  - can_edit = current_user.admin?
+                  /= button_to can_edit ? 'Edit' : 'View',
+                  /        { controller: :courses, action: :show, id: c.id },
+                  /        class: 'btn btn-sm btn-outline-primary float-right',
+                  /        role: :button, method: :get
+                - if current_user.admin?
+                  td.delete
+                    = button_to 'Delete',
+                            { controller: :users, action: :destroy, id: c.id },
+                            class: 'btn btn-sm btn-outline-danger float-right',
+                            method: :delete, data: { confirm: 'Are you sure?' }
+  /- if current_user.admin?
+    form *{action: new_course_path}
+      .form-group.py-1
+        input.form-control *{type: 'submit', value: 'Create Course'}

@@ -9,7 +9,7 @@
         .collapse.navbar-collapse#navbarSupportedContent
             ul.navbar-nav.mr-auto
               li.nav-item
-                a.nav-link *{href: '#'} Courses
+                a.nav-link *{href: courses_path} Courses
               li.nav-item
                 a.nav-link *{href: users_path} Users
             = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link px-0'
