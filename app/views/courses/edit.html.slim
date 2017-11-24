@@ -1,4 +1,5 @@
 .container-fluid.align-middle.user_form
+  h2.my-4 = 'Edit Course'
   - disabled = !current_user.admin?
   = form_for @course do |f|
     .form-group
@@ -12,9 +13,12 @@
       = f.text_area :description, class: 'form-control', disabled: disabled
     .form-group
       = f.label :instructor, 'Instructor'
-      .select
-        = f.select :instructor, class: 'form-control custom-select', disabled: disabled
-          = options_for_select(User.teacher.to_a.map { |t| [t.first_name + ' ' + t.last_name, t.id] }.to_h, selected: @course.instructor)
+      - if !disabled
+        .select
+          = f.select :instructor, class: 'form-control custom-select', disabled: disabled
+            = options_from_collection_for_select(User.teacher, :id, :name, selected: @course.instructor)
+      - else
+        = f.text_field :instructor, value: @course.instructor.name, class: 'form-control', disabled: true
     - if !disabled
       .form-group
         = f.submit class: 'form-control'

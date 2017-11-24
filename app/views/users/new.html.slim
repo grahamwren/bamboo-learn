@@ -7,6 +7,7 @@
       ul
         - @user.errors.full_messages.each do |msg|
           li = msg
+  h2.my-4 = 'Create User'
   = form_for @user do |f|
     .form-group
       = f.hidden_field :id
