@@ -15,8 +15,8 @@
       = f.label :instructor, 'Instructor'
       - if !disabled
         .select
-          = f.select :instructor, class: 'form-control custom-select', disabled: disabled
-            = options_from_collection_for_select(User.teacher, :id, :name, selected: @course.instructor)
+          = f.select :instructor_id, class: 'form-control custom-select'
+            = options_from_collection_for_select(User.teacher, :id, :name, @course.instructor.id)
       - else
         = f.text_field :instructor, value: @course.instructor.name, class: 'form-control', disabled: true
     - if !disabled
