@@ -1,0 +1,20 @@
+.container-fluid.align-middle.user_form
+  - disabled = !current_user.admin?
+  = form_for @course do |f|
+    .form-group
+      = f.label :short_name, 'Short Name'
+      = f.text_field :short_name, class: 'form-control', disabled: disabled
+    .form-group
+      = f.label :long_name, 'Long Name'
+      = f.text_field :long_name, class: 'form-control', disabled: disabled
+    .form-group
+      = f.label :description, 'Description'
+      = f.text_area :description, class: 'form-control', disabled: disabled
+    .form-group
+      = f.label :instructor, 'Instructor'
+      .select
+        = f.select :instructor, class: 'form-control custom-select', disabled: disabled
+          = options_for_select(User.teacher.to_a.map { |t| [t.first_name + ' ' + t.last_name, t.id] }.to_h, selected: @course.instructor)
+    - if !disabled
+      .form-group
+        = f.submit class: 'form-control'

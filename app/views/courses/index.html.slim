@@ -11,8 +11,7 @@
         - @courses.each do |c|
             tr.panel.panel-default
                 td
-                  = c.short_name
-                  /a *{href: course_path(c)} = c.short_name
+                  a *{href: edit_course_path(c)} = c.short_name
                 /td.edit
                   - can_edit = current_user.admin?
                   /= button_to can_edit ? 'Edit' : 'View',
