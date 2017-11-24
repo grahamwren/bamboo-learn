@@ -19,7 +19,7 @@
                     a *{href: user_path(c.instructor)} = c.instructor.name
                 td.edit
                   = button_to current_user.admin? ? 'Edit' : 'View',
-                          {controller: :users, action: :edit, id: c.id},
+                          { controller: :courses, action: :edit, id: c.id },
                           class: 'btn btn-sm btn-outline-primary float-right',
                           role: :button, method: :get
                 - if current_user.admin?
@@ -28,7 +28,7 @@
                             { controller: :courses, action: :destroy, id: c.id },
                             class: 'btn btn-sm btn-outline-danger float-right',
                             method: :delete, data: { confirm: 'Are you sure?' }
-  /- if current_user.admin?
+  - if current_user.admin?
     form *{action: new_course_path}
       .form-group.py-1
         input.form-control *{type: 'submit', value: 'Create Course'}
