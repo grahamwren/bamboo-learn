@@ -12,7 +12,8 @@
           td
             a = a.name
           td = a.due_date.strftime('%B %d, %Y')
-          td = "?/#{a.points}" # TODO: Do this with actual submissions
+          / TODO: Do this with actual submissions
+          td = "?/#{a.points}"
   - if current_user.admin? || @course.instructor == current_user
     form *{ action: new_course_assignment_path(@course) }
       .form-group.py-1
