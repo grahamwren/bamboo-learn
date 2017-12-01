@@ -1,0 +1,24 @@
+.container-fluid.align-middle.user_form
+  h2.my-4 = 'Edit Course'
+  - disabled = !current_user.admin?
+  = form_for @course do |f|
+    .form-group
+      = f.label :short_name, 'Short Name'
+      = f.text_field :short_name, class: 'form-control', disabled: disabled
+    .form-group
+      = f.label :long_name, 'Long Name'
+      = f.text_field :long_name, class: 'form-control', disabled: disabled
+    .form-group
+      = f.label :description, 'Description'
+      = f.text_area :description, class: 'form-control', disabled: disabled
+    .form-group
+      = f.label :instructor, 'Instructor'
+      - if !disabled
+        .select
+          = f.select :instructor_id, class: 'form-control custom-select'
+            = options_from_collection_for_select(User.teacher, :id, :name, @course.instructor.id)
+      - else
+        = f.text_field :instructor, value: @course.instructor.name, class: 'form-control', disabled: true
+    - if !disabled
+      .form-group
+        = f.submit class: 'form-control'

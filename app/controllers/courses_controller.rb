@@ -9,6 +9,15 @@ class CoursesController < ApplicationController
     render 'edit'
   end
 
+  def show
+    @course = Course.find(params[:id])
+    unless current_user.courses.exists? @course.id || @course.instructor == current_user
+      edit && return
+    end
+    @assignments = @course.assignments
+    render 'show'
+  end
+
   def new
     if current_user.admin?
       @course = Course.new
