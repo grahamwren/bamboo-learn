@@ -10,8 +10,8 @@
         tr
           td
             a = a.name
-          td = a.due_date.to_s
+          td = a.due_date.strftime('%B %d, %Y')
   - if current_user.admin? || @course.instructor == current_user
     form *{ action: new_course_assignment_path(@course) }
       .form-group.py-1
-        input.form-control *{type: 'submit', value: 'New Assignment'}
+        input.form-control *{type: 'submit', value: 'New Assignment', disabled: true}

@@ -16,7 +16,7 @@ users_list = [
       password: Rails.application.secrets.admin_password,
       dob: Date.new(1970, 1, 1)
     },
-    { email: 'bamboolearntesting+1' + '@' + 'gmail.com',
+    { email: 'teacher' + '@' + 'bamboo.com',
       user_type: :teacher,
       first_name: 'Teacher',
       last_name: 'Test',
@@ -24,7 +24,7 @@ users_list = [
       password: 'changeM3',
       dob: Date.new(1970, 1, 1)
     },
-    { email: 'bamboolearntesting+2' + '@' + 'gmail.com',
+    { email: 'student' + '@' + 'bamboo.com',
       user_type: :student,
       first_name: 'Student',
       last_name: 'Test',
