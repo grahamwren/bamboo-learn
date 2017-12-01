@@ -16,7 +16,7 @@ users_list = [
       password: Rails.application.secrets.admin_password,
       dob: Date.new(1970, 1, 1)
     },
-    { email: 'bamboolearntesting+1' + '@' + 'gmail.com',
+    { email: 'teacher' + '@' + 'bamboo.com',
       user_type: :teacher,
       first_name: 'Teacher',
       last_name: 'Test',
@@ -24,7 +24,7 @@ users_list = [
       password: 'changeM3',
       dob: Date.new(1970, 1, 1)
     },
-    { email: 'bamboolearntesting+2' + '@' + 'gmail.com',
+    { email: 'student' + '@' + 'bamboo.com',
       user_type: :student,
       first_name: 'Student',
       last_name: 'Test',
@@ -58,7 +58,8 @@ assignment_list = [
     { name: 'Homework 1',
       description: 'This is the first assignment in our class.',
       course: Proc.new { Course.find_by short_name: 'CS3200' }, # Since courses dont exist yet, Proc delays execution till they do
-      points: 100
+      points: 100,
+      due_date: Date.new(3000, 1, 1)
     }
 ]
 
@@ -78,6 +79,8 @@ case Rails.env
       a[:course] = a[:course].call
       Assignment.create a
     end
+
+    User.student.first.courses << Course.find_by(short_name: 'CS3200')
   when 'production'
     # in production force password reset
     users_list.each do |u|

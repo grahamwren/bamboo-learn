@@ -15,11 +15,11 @@
                   - if current_user.courses.any?
                     h6.dropdown-header *{ disabled: true } Courses
                     - current_user.courses.each do |c|
-                      a.dropdown-item *{ href: edit_course_path(c) } = c.short_name
+                      a.dropdown-item *{ href: course_path(c) } = c.short_name
                   - if current_user.lectures.any?
                     h6.dropdown-header *{ disabled: true } Lectures
                     - current_user.lectures.each do |l|
-                      a.dropdown-item *{ href: edit_course_path(l) } = l.short_name
+                      a.dropdown-item *{ href: course_path(l) } = l.short_name
             li.nav-item
               a.nav-link *{href: users_path} Users
             li.nav-item
