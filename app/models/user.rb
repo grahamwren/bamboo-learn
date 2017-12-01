@@ -19,4 +19,8 @@ class User < ApplicationRecord
   validates :school_id, presence: true # TODO: change this attribute name, it doesnt work with rails naming scheme
   validates :user_type, presence: true
   validates :dob, presence: true
+
+  def name
+    self.first_name + ' ' + self.last_name
+  end
 end

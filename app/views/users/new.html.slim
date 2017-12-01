@@ -1,12 +1,5 @@
 .container-fluid.align-middle.user_form
-  - if flash[:notice]
-    .alert.alert-success
-      = flash[:notice]
-  - if @user.errors.any?
-    .alert.alert-warning
-      ul
-        - @user.errors.full_messages.each do |msg|
-          li = msg
+  h2.my-4 = 'Create User'
   = form_for @user do |f|
     .form-group
       = f.hidden_field :id
