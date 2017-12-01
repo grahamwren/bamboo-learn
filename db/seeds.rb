@@ -58,7 +58,8 @@ assignment_list = [
     { name: 'Homework 1',
       description: 'This is the first assignment in our class.',
       course: Proc.new { Course.find_by short_name: 'CS3200' }, # Since courses dont exist yet, Proc delays execution till they do
-      points: 100
+      points: 100,
+      due_date: Date.new(3000, 1, 1)
     }
 ]
 
@@ -78,6 +79,8 @@ case Rails.env
       a[:course] = a[:course].call
       Assignment.create a
     end
+
+    User.student.first.courses << Course.find_by(short_name: 'CS3200')
   when 'production'
     # in production force password reset
     users_list.each do |u|
