@@ -5,12 +5,14 @@
       tr
         th Assignment
         th Due
+        th Grade
     tbody
       - @assignments.each do |a|
         tr
           td
             a = a.name
           td = a.due_date.strftime('%B %d, %Y')
+          td = "?/#{a.points}" # TODO: Do this with actual submissions
   - if current_user.admin? || @course.instructor == current_user
     form *{ action: new_course_assignment_path(@course) }
       .form-group.py-1
