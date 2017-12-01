@@ -7,11 +7,23 @@
         button.navbar-toggler data-toggle= "collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
           span.navbar-toggler-icon
         .collapse.navbar-collapse#navbarSupportedContent
-            ul.navbar-nav.mr-auto
-              li.nav-item
-                a.nav-link *{href: courses_path} Courses
-              li.nav-item
-                a.nav-link *{href: users_path} Users
-            = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link px-0'
+          ul.navbar-nav.mr-auto
+            - if current_user.courses.any? || current_user.lectures.any?
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle *{ data: { toggle: 'dropdown' }, href: '#' } My courses
+                .dropdown-menu
+                  - if current_user.courses.any?
+                    h6.dropdown-header *{ disabled: true } Courses
+                    - current_user.courses.each do |c|
+                      a.dropdown-item *{ href: edit_course_path(c) } = c.short_name
+                  - if current_user.lectures.any?
+                    h6.dropdown-header *{ disabled: true } Lectures
+                    - current_user.lectures.each do |l|
+                      a.dropdown-item *{ href: edit_course_path(l) } = l.short_name
+            li.nav-item
+              a.nav-link *{href: users_path} Users
+            li.nav-item
+              a.nav-link *{href: courses_path} Registration
+          = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link px-0'
       - else
         a.nav-item = link_to('Login', new_user_session_url, method: :get)
