@@ -69,7 +69,9 @@ class CoursesController < ApplicationController
 
   def add_self
     @course = Course.find(params[:id])
-    @course.students << current_user
+    if @course.students << current_user
+      flash[:success] = 'Added class ' + @course.short_name
+    end
     redirect_to courses_path
   end
 
