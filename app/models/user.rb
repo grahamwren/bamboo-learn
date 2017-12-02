@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :rememberable, :trackable, :validatable
 
   # Users can give lectures
-  has_many :lectures, foreign_key: 'instructor_id', class_name: 'Course'
+  has_many :lectures, foreign_key: 'instructor_id', class_name: 'Course', dependent: :destroy
   has_many :instructors, through: :lectures
   # Users can take courses
   has_and_belongs_to_many :courses, -> { distinct }, class_name: 'Course'
