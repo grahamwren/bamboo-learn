@@ -1,5 +1,12 @@
 .container-fluid.align-middle.user_form
-  h2.my-4 = @course.short_name
+  .row.my-4
+    h2.float-left = @course.short_name
+    .float-right
+      - if @course.students.exists?(current_user.id)
+        = button_to 'Drop Course',
+                {controller: :courses, action: :drop_self, id: @course.id},
+                class: 'btn btn-lg btn-outline-danger',
+                method: :delete, data: {confirm: 'Are you sure?'}
   table.table.table-striped
     thead
       tr

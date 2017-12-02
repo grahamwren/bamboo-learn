@@ -67,6 +67,22 @@ class CoursesController < ApplicationController
     end
   end
 
+  def add_self
+    @course = Course.find(params[:id])
+    @course.students << current_user
+    redirect_to courses_path
+  end
+
+  def drop_self
+    @course = Course.find(params[:id])
+    if @course.students.destroy current_user
+      flash[:success] = 'Dropped class ' + @course.short_name
+      redirect_to root_path
+    else
+      flash[:alert] = 'Unable to drop class'
+    end
+  end
+
   def course_params
     params.require(:course).permit(:short_name, :long_name, :description, :instructor_id)
   end
