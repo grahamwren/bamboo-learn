@@ -10,7 +10,7 @@
           ul.navbar-nav.mr-auto
             - if current_user.courses.any? || current_user.lectures.any?
               li.nav-item.dropdown
-                a.nav-link.dropdown-toggle *{ data: { toggle: 'dropdown' }, href: '#' } My courses
+                a.nav-link.dropdown-toggle *{ data: { toggle: 'dropdown' }, href: '#' } My Courses
                 .dropdown-menu
                   - if current_user.courses.any?
                     h6.dropdown-header *{ disabled: true } Courses
