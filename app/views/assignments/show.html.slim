@@ -1,0 +1,16 @@
+.container-fluid.align-middle.user_form
+  h2.my-4 = @assignment.name
+  = form_for @assignment do |f|
+    .form-group
+      = f.label :course, 'Course'
+      = f.text_field :course, value: @assignment.course.short_name,
+              class: 'form-control', disabled: true
+    .form-group
+      = f.label :description, 'Description'
+      = f.text_area :description, class: 'form-control', disabled: true
+    .form-group
+      = f.label :points, 'Total Points'
+      = f.number_field :points, class: 'form-control', disabled: true
+    .form-group
+      = f.label :due_date, 'Due Date'
+      = f.date_field :due_date, class: 'form-control', disabled: true

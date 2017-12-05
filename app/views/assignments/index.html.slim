@@ -3,7 +3,8 @@
   .row.my-4
     .col-12
       .row-fluid
-        h2.float-left = @course.short_name
+        h2.float-left
+          a *{ href: course_path(@course) } = @course.short_name
         - if @course.students.exists?(current_user.id)
           = button_to 'Drop Course',
                   { controller: :courses, action: :drop_self, id: @course.id },
