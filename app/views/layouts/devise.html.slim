@@ -12,10 +12,9 @@ html
     .background.hidden-sm-down.pb-5
       .container-fluid.col-11.col-sm-11.col-md-6.col-lg-4
         h1 Bamboo Learning
-        - if flash[:notice]
-          .alert.alert-success
-            = flash[:notice]
-        - if flash[:alert]
-          .alert.alert-warning
-            = flash[:alert]
+        - flash.each do |k, v|
+          - k = k == 'error' ? 'danger' : k
+          - k = k == 'notice' ? 'info' : k
+          .alert *{class: "alert-#{k}"}
+            = v
         = yield
