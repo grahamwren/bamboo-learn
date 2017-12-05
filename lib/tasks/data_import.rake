@@ -15,4 +15,21 @@ namespace :data_import do
     end
   end
 
+  task build_users: :environment do
+    input = ''
+    STDOUT.puts 'Please enter a password for student, teacher, and admin accounts'
+    input = STDIN.gets.chomp
+    ['student', 'teacher', 'admin'].each_with_index do |type, i|
+      next if User.where(email: type + '@bamboo.com').any?
+      User.create({
+        email: type + '@bamboo.com',
+        password: input,
+        user_type: type,
+        first_name: 'Bamboo',
+        last_name: type.capitalize,
+        dob: 20.years.ago,
+        school_id: i,
+      })
+      end
+  end
 end
