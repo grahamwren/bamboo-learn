@@ -14,7 +14,7 @@
         - @courses.each do |c|
             tr.panel.panel-default
                 th
-                  a *{href: course_path(c)} = c.short_name
+                  a *{href: edit_course_path(c)} = c.short_name
                 td
                   - if c.instructor
                     a *{href: user_path(c.instructor)} = c.instructor.name
