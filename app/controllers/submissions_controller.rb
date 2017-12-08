@@ -37,7 +37,8 @@ class SubmissionsController < ApplicationController
   def create
     set_submission_and_assignment
     if @assignment.course.students.exists?(current_user.id) &&
-        current_user.id == submission_create_params[:user_id].to_i
+        current_user.id == submission_create_params[:user_id].to_i &&
+        @assignment.due_date >= DateTime.now
       @submission = Submission.new submission_create_params
       if @submission.valid?
         @submission.save!

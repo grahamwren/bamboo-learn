@@ -31,4 +31,4 @@
   - if !instructor_access
     form *{action: new_assignment_submission_path(@assignment)}
       .form-group.py-1
-        input.form-control *{type: 'submit', value: 'New Submission'}
+        input.form-control *{type: 'submit', value: 'New Submission', disabled: @assignment.due_date < DateTime.now}
