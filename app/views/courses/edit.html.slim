@@ -5,9 +5,11 @@
     .form-group
       = f.label :short_name, 'Short Name'
       = f.text_field :short_name, class: 'form-control', disabled: disabled
+      small.error = 'Short name is required and must be less than 10 characters'
     .form-group
       = f.label :long_name, 'Long Name'
       = f.text_field :long_name, class: 'form-control', disabled: disabled
+      small.error = 'Long name is required and must be less than 255 characters'
     .form-group
       = f.label :description, 'Description'
       = f.text_area :description, class: 'form-control', disabled: disabled
@@ -19,6 +21,7 @@
             = options_from_collection_for_select(User.teacher, :id, :name, @course.instructor.id)
       - else
         = f.text_field :instructor, value: @course.instructor.name, class: 'form-control', disabled: true
+      small.error = 'Instructor is required'
     - if !disabled
       .form-group
         = f.submit class: 'form-control'
