@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :submissions
   resources :assignments
   root to: 'home#show'
 
