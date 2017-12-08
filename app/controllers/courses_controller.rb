@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @courses = Course.all
     render 'index'
@@ -14,7 +16,8 @@ class CoursesController < ApplicationController
     unless current_user.courses.exists?(@course.id) || @course.instructor == current_user
       edit && return
     end
-    @assignments = @course.assignments
+    @assignments = @course.assignments.where due_date: nil
+    @assignments += @course.assignments.where('due_date is not null').sort_by &:due_date
     render 'show'
   end
 
