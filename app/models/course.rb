@@ -15,7 +15,7 @@ class Course < ApplicationRecord
   def grade(user)
     grade = { n: 0, d: 0 }
     assignments.to_a.inject(grade) do |running_grade, a|
-      next runningg_grade unless a.top_score(user)
+      next running_grade unless a.top_score(user)
       running_grade[:n] += a.top_score(user)
       running_grade[:d] += a.points
       running_grade
