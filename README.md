@@ -14,8 +14,15 @@ Instructions on setting up local instance:
 * DO NOT SETUP THE DATABASE FROM THE PROVIDED MYSQL DUMP
 * Ensure that you are running an OS based on Unix or Linux (if not go here)
 * Run `git clone https://github.com/grahamwren/bamboo-learn.git` or unzip the package bamboo-learn.zip into the current directory
-* Follow the instructions here https://gorails.com/setup/ubuntu/16.04 (apparently takes 30 mins), skipping the "final steps" instructions, or just go to https://bamboo-learn.herokuapp.com with the above links.
-
+* Either
+	* Follow the instructions here https://gorails.com/setup/ubuntu/16.04 (apparently takes 30 mins), skipping the "final steps" instructions, or just go to https://bamboo-learn.herokuapp.com with the above links.
+	* Simplistic intructions:
+		* `cd ./bamboo-learn`
+		* `gem install bundle`
+		* `bundle install`
+		* `rake db:setup`
+		* `rails server`
+		* Then go to localhost:3000 in a browser
 
 Page-by-page description:
 * Homepage
@@ -42,6 +49,7 @@ If logged in as a student:
     * Drop Course
     * List of assignments for this course with option of view 
     * If you click view, you can view assignment details, which include course name, description of assignment, total points, and due date.
+	* At bottom of page current running grade in the course is displayed if any of your assignments have been graded.
 * /users
     * List of users with option of view
     * If you click view, you can view user details, which include school id, email, first name, last name, date of birth, and user type.
