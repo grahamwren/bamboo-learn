@@ -1,0 +1,24 @@
+.container-fluid.align-middle.user_form
+  h2.my-4 = 'Grade Submission'
+  = form_for @submission do |f|
+    .form-group
+      = f.label :course, 'Assignment'
+      = f.text_field :assignment, value: @submission.assignment.name,
+              class: 'form-control', disabled: true
+    .form-group
+      = f.label :user, 'Student'
+      = f.text_field :user, value: @submission.user.name,
+              class: 'form-control', disabled: true
+    .form-group
+      = f.label :created_at, 'Submission Date'
+      = f.text_field :created_at, value: @submission.created_at.strftime('%B %d, %Y'),
+              class: 'form-control', disabled: true
+    .form-group
+      = f.label :text, 'Submission'
+      = f.text_area :text, value: @submission.text,
+              class: 'form-control', disabled: true
+    .form-group
+      = f.label :grade, "Grade (out of #{@submission.assignment.points})"
+      = f.number_field :grade, class: 'form-control'
+    .form-group
+      = f.submit class: 'form-control'

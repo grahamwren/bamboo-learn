@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :instructors, through: :lectures
   # Users can take courses
   has_and_belongs_to_many :courses, -> { distinct }, class_name: 'Course'
+  # Users can submit for assignments
+  has_many :submissions, dependent: :destroy
 
   enum user_type: [:admin, :teacher, :student]
 

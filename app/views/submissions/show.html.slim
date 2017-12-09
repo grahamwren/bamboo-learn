@@ -1,0 +1,16 @@
+.container-fluid.align-middle.user_form
+  h2.my-4 = 'View Submission'
+  = form_for @submission do |f|
+    = f.hidden_field :assignment_id, value: @submission.assignment.id
+    = f.hidden_field :user_id, value: @submission.user.id
+    .form-group
+      = f.label :course, 'Assignment'
+      = f.text_field :assignment, value: @submission.assignment.name,
+              class: 'form-control', disabled: true
+    .form-group
+      = f.label :grade, 'Grade'
+      = f.text_field :grade, value: @submission.grade ? "#{@submission.grade}/#{@submission.assignment.points}" : '',
+              class: 'form-control', disabled: true
+    .form-group
+      = f.label :text, 'Description'
+      = f.text_area :text, class: 'form-control', disabled: true

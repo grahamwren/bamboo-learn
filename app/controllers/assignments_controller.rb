@@ -32,7 +32,8 @@ class AssignmentsController < ApplicationController
   def index
     set_course
     if @course.students.exists?(current_user.id) || current_user == @course.instructor
-      @assignments = @course.assignments
+      @assignments = @course.assignments.where due_date: nil
+      @assignments += @course.assignments.where('due_date is not null').sort_by &:due_date
       render 'index'
     else
       flash[:error] = 'Access Denied'
@@ -90,6 +91,8 @@ class AssignmentsController < ApplicationController
       redirect_to course_path(@assignment.course)
     end
   end
+
+  private
 
   def set_course
     @course = Course.find(params[:course_id] || assignment_params[:course_id])

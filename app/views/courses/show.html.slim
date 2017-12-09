@@ -14,7 +14,8 @@
       tr
         th Assignments
         th Due
-        th Grade
+        - if @course.students.exists? current_user.id
+          th Grade
         th
         - if instructor_access
           th
@@ -22,13 +23,16 @@
       - @assignments.each do |a|
         tr
           td
-            a *{ href: assignment_path(a) } = a.name
+            a *{ href: assignment_submissions_path(a) } = a.name
           td = a.due_date ? a.due_date.strftime('%B %d, %Y') : ''
           / TODO: Do this with actual submissions
-          td = a.points != 0 ? "?/#{a.points}" : ''
+          - if a.course.students.exists? current_user.id
+            td = a.points != 0 ? "#{a.top_score(current_user) || 0}/#{a.points}" : ''
           td.edit
-            = button_to instructor_access ? 'Edit' : 'View',
-                    {controller: :assignments, action: instructor_access ? :edit : :show, id: a.id},
+            = button_to instructor_access ? 'Edit' : 'Submit',
+                    {controller: instructor_access ? :assignments : :submissions,
+                            action: instructor_access ? :edit : :new,
+                            (instructor_access ? :id : :assignment_id) => a.id},
                     class: 'btn btn-sm btn-outline-primary float-right',
                     role: :button, method: :get
           - if instructor_access

@@ -1,0 +1,34 @@
+.container-fluid.align-middle.user_form
+  - @course = @assignment.course
+  - instructor_access = current_user.admin? || @course.instructor == current_user
+  .row.my-4
+    .col-12
+      .row-fluid
+        .float-left
+          .h2
+            a *{ href: assignment_path(@assignment) } = @assignment.name
+          span = @assignment.description
+  table.table.table-striped
+    thead
+      tr
+        th Submission
+        th Grade
+        th
+    tbody
+      - @submissions.each_with_index do |s, i|
+        tr
+          td
+            a *{href: submission_path(s)} = s.created_at.strftime('%B %d, %Y')
+          - if instructor_access
+            td = (s.grade ? "#{s.grade}/#{s.assignment.points}" : 'Pending')
+          - else
+            td = i == 0 ? (s.grade ? "#{s.grade}/#{s.assignment.points}" : 'Pending') : ''
+          td.view
+            = button_to instructor_access ? 'Grade' : 'View',
+                    {controller: :submissions, action: instructor_access ? :edit : :show, id: s.id},
+                    class: 'btn btn-sm btn-outline-primary float-right',
+                    role: :button, method: :get
+  - if !instructor_access
+    form *{action: new_assignment_submission_path(@assignment)}
+      .form-group.py-1
+        input.form-control *{type: 'submit', value: 'New Submission', disabled: @assignment.due_date < DateTime.now}
