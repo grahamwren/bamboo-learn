@@ -41,7 +41,6 @@
                       {controller: :assignments, action: :destroy, id: a.id},
                       class: 'btn btn-sm btn-outline-danger float-right',
                       method: :delete, data: {confirm: 'Are you sure?'}
-
   - if @course.students.exists?(current_user.id) && @course.grade(current_user)
     h2 = "Running Grade: #{@course.grade(current_user)}%"
   - if instructor_access
