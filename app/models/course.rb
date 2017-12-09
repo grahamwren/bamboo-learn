@@ -17,10 +17,10 @@ class Course < ApplicationRecord
     assignments.to_a.inject(grade) do |running_grade, a|
       next running_grade unless a.top_score(user)
       running_grade[:n] += a.top_score(user)
-      running_grade[:d] += a.points
+      running_grade[:d] += a.points || 0
       running_grade
     end
-    grade[:d] ? (grade[:n] * 1.0) / (grade[:d] * 1.0) * 100 : nil
+    grade[:d] && grade[:d] != 0 ? (grade[:n] * 1.0) / (grade[:d] * 1.0) * 100 : nil
   end
 
   private
