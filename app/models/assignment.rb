@@ -11,7 +11,7 @@ class Assignment < ApplicationRecord
   def top_score(user)
     ss = submissions.where(user: user)
     return nil if ss.empty?
-    ss.sort_by(&:created_at).first.grade
+    ss.sort_by(&:created_at).reverse_order.first.grade
   end
 
   def percentage_grade(user)
