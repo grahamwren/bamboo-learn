@@ -12,6 +12,16 @@ class Course < ApplicationRecord
   validates :instructor, presence: true
   validate :validate_instructor_is_teacher
 
+  def grade(user)
+    grade = { n: 0, d: 0 }
+    assignments.to_a.inject(grade) do |running_grade, a|
+      next unless a.top_score(user)
+      running_grade[:n] += a.top_score(user)
+      running_grade[:d] += a.points
+    end
+    grade[:d] ? (grade[:n] * 1.0) / (grade[:d] * 1.0) * 100 : nil
+  end
+
   private
 
   def validate_instructor_is_teacher

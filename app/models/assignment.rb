@@ -10,7 +10,7 @@ class Assignment < ApplicationRecord
 
   def top_score(user)
     ss = submissions.where(user: user)
-    return 0 if ss.empty?
+    return nil if ss.empty?
     ss.sort_by(&:created_at).first.grade
   end
 

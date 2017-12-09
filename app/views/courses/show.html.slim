@@ -27,7 +27,7 @@
           td = a.due_date ? a.due_date.strftime('%B %d, %Y') : ''
           / TODO: Do this with actual submissions
           - if a.course.students.exists? current_user.id
-            td = a.points != 0 ? "#{a.top_score(current_user) || 0}/#{a.points}" : ''
+            td = a.points != 0 ? (a.top_score(current_user) ? "#{a.top_score(current_user)}/#{a.points}" : 'Pending') : ''
           td.edit
             = button_to instructor_access ? 'Edit' : 'Submit',
                     {controller: instructor_access ? :assignments : :submissions,
@@ -41,6 +41,9 @@
                       {controller: :assignments, action: :destroy, id: a.id},
                       class: 'btn btn-sm btn-outline-danger float-right',
                       method: :delete, data: {confirm: 'Are you sure?'}
+
+  - if @course.students.exists?(current_user.id) && @course.grade(current_user)
+    h2 = "Running Grade: #{@course.grade(current_user)}%"
   - if instructor_access
     form *{ action: new_course_assignment_path(@course) }
       .form-group.py-1
